@@ -21,13 +21,24 @@ tr:nth-child(even) {
 </head>
 <script>
     const baseUrl = 'https://jsonplaceholder.typicode.com/posts/';
-    function keyPressed() {
+    async function keyPressed() {
         const inputElement = document.getElementById("idInput");
         const currentValue = inputElement.value;
-        const outputElement = document.getElementById("idOutput");
-        outputElement.innerHTML = `${currentValue}`; 
+        const length = currentValue.length;
+        const updatedUrl = baseUrl + length;
 
-        console.log(`currentValue inside input box: ${currentValue}`);
+        const response = await fetch(updatedUrl);
+        console.log(`raw data from internet: ${response}`);
+        const jsonData = await response.json();
+        console.log(`jason data from internet: ${jsonData}`);
+        console.log(jsonData);
+        // console.log(`json data: ${jsonData.title}`);
+
+
+        // console.log(`data from internet: ${dataFromInternet}`);
+        const outputElement = document.getElementById("idOutput");
+        outputElement.innerHTML = `id: ${jsonData.id}, title: ${jsonData.title}, userId: ${jsonData.userId}`; 
+        // outputElement.innerHTML =  jsonData.id + jsonData.title + jsonData.userId;
     }
 </script>
 <body>
