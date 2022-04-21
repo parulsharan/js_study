@@ -54,7 +54,7 @@ btnRoll.addEventListener('click', function () {
 
     if (dice !== 1) {
       currentScore += dice;
-      document.getElementById(`score--${activePlayer}`).textContent =
+      document.getElementById(`current--${activePlayer}`).textContent =
         currentScore;
     } else {
       switchPlayer();
@@ -87,3 +87,4 @@ btnHold.addEventListener('click', function () {
 });
 
 btnNew.addEventListener('click', init);
+

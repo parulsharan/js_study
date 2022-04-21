@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AJAX Example</title>
+	
+	<script>
+		function getWelcome(){
+            // 1. create ajax object
+			let ajaxRequest = new XMLHttpRequest();
+
+            // 2. configure
+			ajaxRequest.open('GET', 'https://happycoding.io/tutorials/javascript/example-ajax-files/text-welcome.txt');
+
+            // 3. Callback implemented
+            /*ajaxRequest.onreadystatechange = function(){	
+                //  console.log(`when readySate=${ajaxRequest.readyState}, value of ajaxRequest.responseText = ${ajaxRequest.responseText}`);
+                if(ajaxRequest.readyState == 4){
+                    //the request is completed, now check its status
+                    console.log('data from ajax call:-> '+ ajaxRequest.responseText);
+                    document.getElementById("welcome").innerHTML += ajaxRequest.responseText;
+                }
+                else{
+                    console.log("Ignored readyState: " + ajaxRequest.readyState);
+                }       
+            }*/
+
+            // 4. now send the request to server.
+			ajaxRequest.send();
+            const dataReceivedFromUrl = ajaxRequest.responseText;
+            document.getElementById("xyz").innerHTML += dataReceivedFromUrl;
+		}
+	
+	</script>	
+</head>
+<body onload="getWelcome()">
+	<p id="xyz">KAMAL Parul </p>
+	<p>This is static data.</p>
+</body>
+</html>

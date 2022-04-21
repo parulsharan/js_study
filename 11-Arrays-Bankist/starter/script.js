@@ -61,6 +61,41 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+const displayMovements = function (_movements) {
+  // for (let i = 0; i < _movements.length; i++) {
+  //   const movement = _movements[i];
+  //   const transactionType = movement > 0 ? 'deposit' : 'withdrawl';
+  //   const html = `
+  //   <div class="movements__row">
+  //         <div class="movements__type movements__type--${transactionType}">2 deposit</div>
+  //         <div class="movements__date">${i}</div>
+  //         <div class="movements__value">${movement}€</div>
+  //       </div>
+  //   `;
+  //   console.log('current movement value: ', movement);
+  //   console.log('HTML GENERATED: ', html);
+
+  //   containerMovements.insertAdjacentHTML('afterbegin', html);
+  // }
+
+  _movements.forEach((movement, i) => {
+    const transactionType = movement > 0 ? 'deposit' : 'withdrawal';
+    const html = `
+    <div class="movements__row">
+          <div class="movements__type movements__type--${transactionType}">${
+      i + 1
+    } ${transactionType}</div>
+          <div class="movements__date">${i}</div>
+          <div class="movements__value">${movement}€</div>
+        </div>
+    `;
+    console.log('current movement value: ', movement);
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+  });
+};
+
+displayMovements(account4.movements);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
