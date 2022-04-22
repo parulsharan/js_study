@@ -24,24 +24,38 @@
     async function parulKeyPressedFn() {
       const baseUrl = "https://api.genderize.io/?name=";
       // 1. get value from input text box
-      const inputElement = document.getElementById("idInput");
-      const currentValue = inputElement.value;
+      const nameToBeSearched = getDataFromInputText();
 
       // 2. add length to base url
-      // const length = currentValue.length;
-      const updatedUrl = baseUrl + currentValue;
+      const updatedUrl = baseUrl + nameToBeSearched;
 
-      // 3. get data from internet and convert it to json object
+      // 3. get data from interne
+      const jsonData = await getDataFromInternet(updatedUrl);
+
+      // 4. display data in DIV
+      displayData(jsonData);
+    }
+
+    function getDataFromInputText() {
+      const inputElement = document.getElementById("idInput");
+      return inputElement.value;
+    }
+
+    function displayData(jsonData) {
+      const outputElement = document.getElementById("idOutput");
+      outputElement.innerHTML = `name: ${jsonData.name}, gender: ${jsonData.gender}, probability: ${jsonData.probability},count:${jsonData.count}`;
+    }
+
+    async function getDataFromInternet(updatedUrl) {
+      // a. get data from internet
       const response = await fetch(updatedUrl);
       console.log(`raw data from internet: ${response}`);
+
+      // b. convert it to json object
       const jsonData = await response.json();
       console.log(`jason data from internet: ${jsonData}`);
       console.log(jsonData);
-      // console.log(`json data: ${jsonData.title}`);
-
-      // 4. display data in DIV
-      const outputElement = document.getElementById("idOutput");
-      outputElement.innerHTML = `name: ${jsonData.name}, gender: ${jsonData.gender}, probability: ${jsonData.probability},count:${jsonData.count}`;
+      return jsonData;
     }
   </script>
   <body>
