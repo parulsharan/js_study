@@ -1,80 +1,80 @@
 <!DOCTYPE html>
 <html>
-<head>
-<style>
-table {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
+  <head>
+    <style>
+      table {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
 
-td, th {
-  border: 1px solid #257a49;
-  text-align: left; 
-  padding: 8px;
-}
+      td,
+      th {
+        border: 1px solid #30257a;
+        text-align: left;
+        padding: 8px;
+      }
 
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-</style>
-</head>
-<script>
-    const baseUrl = 'https://jsonplaceholder.typicode.com/posts/';
-    async function keyPressed() {
-        const inputElement = document.getElementById("idInput");
-        const currentValue = inputElement.value;
-        const length = currentValue.length;
-        const updatedUrl = baseUrl + length;
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+    </style>
+  </head>
+  <script>
+    async function parulKeyPressedFn() {
+      const baseUrl = "https://api.genderize.io/?name=";
+      // 1. get value from input text box
+      const inputElement = document.getElementById("idInput");
+      const currentValue = inputElement.value;
 
-        const response = await fetch(updatedUrl);
-        console.log(`raw data from internet: ${response}`);
-        const jsonData = await response.json();
-        console.log(`jason data from internet: ${jsonData}`);
-        console.log(jsonData);
-        // console.log(`json data: ${jsonData.title}`);
+      // 2. add length to base url
+      // const length = currentValue.length;
+      const updatedUrl = baseUrl + currentValue;
 
+      // 3. get data from internet and convert it to json object
+      const response = await fetch(updatedUrl);
+      console.log(`raw data from internet: ${response}`);
+      const jsonData = await response.json();
+      console.log(`jason data from internet: ${jsonData}`);
+      console.log(jsonData);
+      // console.log(`json data: ${jsonData.title}`);
 
-        // console.log(`data from internet: ${dataFromInternet}`);
-        const outputElement = document.getElementById("idOutput");
-        outputElement.innerHTML = `id: ${jsonData.id}, title: ${jsonData.title}, userId: ${jsonData.userId}`; 
-        // outputElement.innerHTML =  jsonData.id + jsonData.title + jsonData.userId;
+      // 4. display data in DIV
+      const outputElement = document.getElementById("idOutput");
+      outputElement.innerHTML = `name: ${jsonData.name}, gender: ${jsonData.gender}, probability: ${jsonData.probability},count:${jsonData.count}`;
     }
-</script>
-<body>
+  </script>
+  <body>
+    <h2>HTML Table</h2>
 
-<h2>HTML Table</h2>
+    <input id="idInput" type="text" value="" onInput="parulKeyPressedFn()" />
+    <br /><br /><br />
 
-<input id="idInput" type="text" value="" onInput="keyPressed()">
-<br><br><br>
+    <div id="idOutput">waiting ...</div>
+    <p>paragraph</p>
 
-<div id="idOutput"> waiting ...</div>
-<br><br><br>
+    <br /><br /><br />
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Age</th>
-    <th>Address</th>
-    <th>Zip code</th>
-  </tr>
-  
-  <tr>
-    <td>Parul Mann</td>
-    <td>32</td>
-    <td>San Ramon</td>
-    <td>94583</td>
-  </tr>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Address</th>
+        <th>Zip code</th>
+      </tr>
 
-  <tr>
-    <td>Davisha Mann</td>
-    <td>8</td>
-    <td>San Ramon</td>
-  </tr>
-  
-</table>
+      <tr>
+        <td>Parul Mann</td>
+        <td>32</td>
+        <td>San Ramon</td>
+        <td>94583</td>
+      </tr>
 
-</body>
+      <tr>
+        <td>Davisha Mann</td>
+        <td>8</td>
+        <td>San Ramon</td>
+      </tr>
+    </table>
+  </body>
 </html>
-
-
