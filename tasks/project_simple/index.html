@@ -36,6 +36,8 @@
       displayData(jsonData);
     }
 
+    const callWithDebouncer = debounce(parulKeyPressedFn, 250);
+
     function getDataFromInputText() {
       const inputElement = document.getElementById("idInput");
       return inputElement.value;
@@ -44,6 +46,22 @@
     function displayData(jsonData) {
       const outputElement = document.getElementById("idOutput");
       outputElement.innerHTML = `name: ${jsonData.name}, gender: ${jsonData.gender}, probability: ${jsonData.probability},count:${jsonData.count}`;
+    }
+
+    function debounce(func, wait, immediate) {
+      var timeout;
+      return function executedFunction() {
+        var context = this;
+        var args = arguments;
+        var later = function () {
+          timeout = null;
+          if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+      };
     }
 
     async function getDataFromInternet(updatedUrl) {
@@ -61,7 +79,7 @@
   <body>
     <h2>HTML Table</h2>
 
-    <input id="idInput" type="text" value="" onInput="parulKeyPressedFn()" />
+    <input id="idInput" type="text" value="" onInput="callWithDebouncer()" />
     <br /><br /><br />
 
     <div id="idOutput">waiting ...</div>
@@ -72,22 +90,16 @@
     <table>
       <tr>
         <th>Name</th>
-        <th>Age</th>
-        <th>Address</th>
-        <th>Zip code</th>
+        <th>Gender</th>
+        <th>probability</th>
+        <th>Count</th>
       </tr>
 
-      <tr>
+      <tr id="idTableRow">
         <td>Parul Mann</td>
-        <td>32</td>
-        <td>San Ramon</td>
-        <td>94583</td>
-      </tr>
-
-      <tr>
-        <td>Davisha Mann</td>
-        <td>8</td>
-        <td>San Ramon</td>
+        <td>female</td>
+        <td>1.0</td>
+        <td>1</td>
       </tr>
     </table>
   </body>
