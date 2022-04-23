@@ -44,8 +44,13 @@
     }
 
     function displayData(jsonData) {
-      const outputElement = document.getElementById("idOutput");
-      outputElement.innerHTML = `name: ${jsonData.name}, gender: ${jsonData.gender}, probability: ${jsonData.probability},count:${jsonData.count}`;
+      // const outputElement = document.getElementById("idOutput");
+      // outputElement.innerHTML = `name: ${jsonData.name}, gender: ${jsonData.gender}, probability: ${jsonData.probability},count:${jsonData.count}`;
+      const outputElement = document.getElementById("idTableRow");
+      outputElement.innerHTML = `<td> ${jsonData.name} </td>
+                                 <td> ${jsonData.gender} </td>
+                                 <td> ${jsonData.probability} </td>
+                                 <td> ${jsonData.count} </td>`; //  `name: ${jsonData.name}, gender: ${jsonData.gender}, probability: ${jsonData.probability},count:${jsonData.count}`;
     }
 
     function debounce(func, wait, immediate) {
