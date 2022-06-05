@@ -19,19 +19,19 @@
       const decrease = () => {
         counter -= 1;
         // alert(`decrease called ${counter}`);
-        display(counter);
+        display();
       };
       const reset = () => {
         counter = 0;
         // alert(`reset called ${counter}`);
-        display(counter);
+        display();
       };
       const increase = () => {
         counter += 1;
         //alert(`increase called ${counter}`);
-        display(counter);
+        display();
       };
-      const display = (counter) => {
+      const display = () => {
         const counterElement = document.getElementById("idCounter");
         counterElement.innerHTML = counter;
       };
