@@ -6,7 +6,7 @@
   <body>
     <div><h1>counter</h1></div>
     <div>
-      <h1>3</h1>
+      <h1 id="idCounter">3</h1>
     </div>
     <div>
       <button onclick="decrease()">decrease</button>
@@ -18,15 +18,21 @@
       let counter = 0;
       const decrease = () => {
         counter -= 1;
-        alert(`decrease called ${counter}`);
+        // alert(`decrease called ${counter}`);
+        const counterElement = document.getElementById("idCounter");
+        counterElement.innerHTML = counter;
       };
       const reset = () => {
         counter = 0;
-        alert(`reset called ${counter}`);
+        // alert(`reset called ${counter}`);
+        const counterElement = document.getElementById("idCounter");
+        counterElement.innerHTML = counter;
       };
       const increase = () => {
         counter += 1;
-        alert(`increase called ${counter}`);
+        //alert(`increase called ${counter}`);
+        const counterElement = document.getElementById("idCounter");
+        counterElement.innerHTML = counter;
       };
     </script>
   </body>
