@@ -22,5 +22,5 @@ const findNumber = function (array, n) {
 };
 
 const numberArray = [11, 12, 13, 14, 15, 16];
-const result = findNumber(numberArray, 16);
+const result = findNumber(numberArray, 14);
 console.log(result);

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <style>
+      table {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      td,
+      th {
+        border: 1px solid #30257a;
+        text-align: left;
+        padding: 8px;
+      }
+
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+    </style>
+  </head>
+  <script>
+    const keyPressfn = async () => {
+      //console.log(`my function called:`);
+      const inputBox = document.getElementById("idInputBox");
+      const value = inputBox.value;
+      //console.log(`current value is :${value}`);
+
+      const baseUrl = "https://api.genderize.io/?name=";
+      // 1. create a function which will take above url and add `value` and fetch json data from it.
+      const userUrl = baseUrl + value;
+      const userData = await fetchNameCharacterstics(userUrl);
+      //console.log(`the user data is `, userData);
+
+      const displayRow = document.getElementById("idTableRow");
+      displayRow.innerHTML = `<td>${userData.name}</td>
+        <td>${userData.gender}</td>
+        <td>${userData.probability}</td>
+        <td>${userData.count}</td>`;
+    };
+
+    function debounce(func, wait, immediate) {
+      var timeout;
+      return function executedFunction() {
+        var context = this;
+        var args = arguments;
+        var later = function () {
+          timeout = null;
+          if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+      };
+    }
+    const callWithDebouncer = debounce(keyPressfn, 250);
+
+    const fetchNameCharacterstics = async (userURL) => {
+      console.log(`getting fetch data: ${userURL}`);
+      const response = await fetch(userURL);
+      const data = await response.json();
+      return data;
+    };
+  </script>
+  <body>
+    <h2>HTML Table</h2>
+
+    <input id="idInputBox" type="text" value="" onkeyup="callWithDebouncer()" />
+    <br /><br /><br />
+
+    <div id="idOutput">waiting ...</div>
+    <p>paragraph</p>
+
+    <br /><br /><br />
+
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>probability</th>
+        <th>Count</th>
+      </tr>
+
+      <tr id="idTableRow">
+        <td>Parul Mann</td>
+        <td>female</td>
+        <td>1.0</td>
+        <td>1</td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -1,49 +1,50 @@
 import * as model from './model.js';
-import { state } from './model.js';
-import recipeView from './views/recipeView.js';
-import searchView from './views/searchView.js';
-import resultView from './views/resultView.js';
-
+import view from './views/recipeView.js';
+import icons from 'url:../img/icons.svg'; //parcel1
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
-import { async } from 'regenerator-runtime';
-import resultView from './views/resultView.js';
+import recipeView from './views/recipeView.js';
 
-const controlRecipes = async function () {
+const recipeContainer = document.querySelector('.recipe');
+
+const timeout = function (s) {
+  return new Promise(function (_, reject) {
+    setTimeout(function () {
+      reject(new Error(`Request took too long! Timeout after ${s} second`));
+    }, s * 1000);
+  });
+};
+
+// https://forkify-api.herokuapp.com/v2
+
+///////////////////////////////////////
+const renderSpinner = function (parentEL) {
+  const markup = `
+  <div class="spinner">
+          <svg>
+            <use href="${icons}#icon-loader"></use>
+          </svg>
+        </div>
+  `;
+  parentEL.innerHTML = '';
+  parentEL.insertAdjacentHTML('afterbegin', markup);
+};
+
+const showRecipe = async function () {
   try {
-    resultView.renderSpinner();
     const id = window.location.hash.slice(1);
+    console.log(id);
 
     if (!id) return;
-    recipeView.renderSpinner(recipeContainer);
+    renderSpinner(recipeContainer);
 
-    //1. loding recipe
+    //loadthe recipe
     await model.loadRecipe(id);
 
-    //2. rendering recipe
+    //rendering recipe
     recipeView.render(model.state.recipe);
-  } catch (err) {
-    console.log(err);
-    recipeView.renderError(`${err} 🔥🔥🔥🔥🔥🔥`);
+  } catch (error) {
+    alert(error);
   }
 };
-const controlSearchResult = async function () {
-  try {
-    //1 get search query
-    const query = searchView.getquery();
-    if (!query) return;
-    //2 load search result
-    await model.loadSearchResult('query');
-    //3 render research
-    console.log(model.state.recipe.result);
-    resultView.render(model.state.recipe.result);
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-const init = function () {
-  recipeView.addHandlerRender(controlRecipes);
-  recipeView.addHandlerRender(controlSearchResult);
-};
-init();
+['hashchange', 'load'].forEach(ev => window.addEventListener(ev, showRecipe));

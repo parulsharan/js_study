@@ -4,4 +4,5 @@ const table = (n) => {
     console.log(`${multi}`);
   }
 };
-table(2);
+const number = table(2);
+console.log(`table of :${number}`);

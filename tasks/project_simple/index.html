@@ -30,7 +30,12 @@
       const updatedUrl = baseUrl + nameToBeSearched;
 
       // 3. get data from interne
-      const jsonData = await getDataFromInternet(updatedUrl);
+      // const jsonData = await getDataFromInternet(updatedUrl);
+      const response = await fetch(updatedUrl);
+      console.log(`raw data from internet: ${response}`);
+
+      // b. convert it to json object
+      const jsonData = await response.json();
 
       // 4. display data in DIV
       displayData(jsonData);

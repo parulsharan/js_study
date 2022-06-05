@@ -4,19 +4,21 @@ const fib = function (n) {
   let firstNumber = 0;
   let secondNumber = 1;
   let currentNumber = 0;
-  let finalResult = [firstNumber, secondNumber];
+  let output = [firstNumber, secondNumber];
   for (let index = 0; index < n; index++) {
     currentNumber = firstNumber + secondNumber;
-    finalResult.push(currentNumber);
+    output.push(currentNumber);
     // console.log(currentNumber + "\n");
 
     firstNumber = secondNumber;
     secondNumber = currentNumber;
   }
 
-  return finalResult;
+  return output;
 };
-
+const value = 8;
+const fibonacci = fib(value);
+console.log(`the value of :${value}`);
 // const fibWithCB = function (n, callback) {
 //   let firstNumber = 0;
 //   let secondNumber = 1;
