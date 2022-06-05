@@ -6,7 +6,7 @@
   <body>
     <div><h1>counter</h1></div>
     <div>
-      <h1 id="idCounter">3</h1>
+      <h1 id="idCounter">0</h1>
     </div>
     <div>
       <button onclick="decrease()">decrease</button>
@@ -17,6 +17,10 @@
     <script>
       let counter = 0;
       const decrease = () => {
+        if (counter < 1) {
+          alert(`value is too low`);
+          return;
+        }
         counter -= 1;
         // alert(`decrease called ${counter}`);
         display();
@@ -27,6 +31,10 @@
         display();
       };
       const increase = () => {
+        if (counter >= 10) {
+          alert(` value is too high`);
+          return;
+        }
         counter += 1;
         //alert(`increase called ${counter}`);
         display();
