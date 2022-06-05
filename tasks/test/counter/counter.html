@@ -15,14 +15,18 @@
     </div>
 
     <script>
+      let counter = 0;
       const decrease = () => {
-        alert("decrease called");
+        counter -= 1;
+        alert(`decrease called ${counter}`);
       };
       const reset = () => {
-        alert("reset called");
+        counter = 0;
+        alert(`reset called ${counter}`);
       };
       const increase = () => {
-        alert("increase called");
+        counter += 1;
+        alert(`increase called ${counter}`);
       };
     </script>
   </body>
